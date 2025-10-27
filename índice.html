@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VagaAutomática — Deixe o robô se candidatar por você</title>
+  <meta name="description" content="VagaAutomática: aplicação automática de vagas, otimização de perfil e resultados reais." />
+  <meta name="author" content="VagaAutomática" />
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #00bfff; /* azul claro para CTAs */
+      --bg-dark: #0b1120; /* azul escuro elegante */
+      --text-light: #ffffff;
+      --card-bg: rgba(255,255,255,0.05);
+      --card-border: rgba(255,255,255,0.1);
+      --shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+    }
+    a {
+      color: var(--accent);
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: #66ccff;
+    }
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0,191,255,0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(0,191,255,0.3); }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- HEADER -->
+  <header class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
+    <a class="flex items-center gap-3" href="#" aria-label="VagaAutomática - Início">
+      <img src="16d2faf8-f2bc-4952-b477-8a3dd5657362.png" alt="Avatar VagaAutomática" class="w-10 h-10 rounded-full shadow-md border border-white">
+      <div>
+        <div class="text-sm font-semibold text-white">VagaAutomática</div>
+        <div class="text-xs text-blue-300 -mt-1">Automação de candidaturas</div>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-6 text-sm text-blue-200">
+      <a href="#servicos" class="hover:text-white">Serviços</a>
+      <a href="#provas" class="hover:text-white">Provas</a>
+      <a href="#faq" class="hover:text-white">FAQ</a>
+      <a href="#contato" class="ml-4 inline-flex items-center rounded-full px-4 py-2 border border-blue-400 text-blue-100 hover:bg-blue-500 hover:text-white transition">
+        Fale no WhatsApp
+      </a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-5xl mx-auto px-6 py-10 text-center">
+    <section class="py-12">
+      <h1 class="text-4xl font-extrabold mb-4 text-white">Deixe o robô trabalhar por você</h1>
+      <p class="text-blue-200 mb-8 max-w-2xl mx-auto">O <strong>VagaAutomática</strong> aplica automaticamente para vagas, otimiza seu perfil e aumenta suas chances de contratação.</p>
+
+      <div class="flex justify-center gap-4 items-center">
+        <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer"
+           class="pulse inline-flex items-center gap-3 px-6 py-4 rounded-full font-semibold text-white"
+           style="background: linear-gradient(90deg,#00bfff,#0080ff);">
+           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
+           Quero que o robô me candidate
+        </a>
+        <a href="#servicos" class="inline-flex items-center px-4 py-3 rounded-lg bg-transparent border border-blue-400 text-blue-200 hover:bg-blue-600 hover:text-white transition">
+          Ver serviços
+        </a>
+      </div>
+    </section>
+
+    <section id="servicos" class="py-10 text-left">
+      <h2 class="text-2xl font-semibold mb-6 text-white">Serviços</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card p-5">
+          <h3 class="font-semibold mb-2 text-blue-200">Aplicações automáticas</h3>
+          <p class="text-blue-100 text-sm">Envio automático e otimizado de candidaturas personalizadas.</p>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-semibold mb-2 text-blue-200">Otimização de perfil</h3>
+          <p class="text-blue-100 text-sm">Ajustamos seu título, resumo e palavras-chave para maior visibilidade.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="py-10">
+      <h3 class="text-xl font-semibold mb-3 text-white">Pronto para simplificar sua busca?</h3>
+      <p class="text-blue-200 mb-6">Em poucos minutos o VagaAutomática começa a trabalhar por você.</p>
+      <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer"
+         class="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-full font-semibold pulse">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
+        Sim — quero que o robô me candidate
+      </a>
+    </section>
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-6 py-8 text-sm text-blue-300 text-center border-t border-blue-800">
+    © <span id="year"></span> VagaAutomática — Todos os direitos reservados
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
