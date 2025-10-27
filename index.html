@@ -4,369 +4,191 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>VagaAutomática — Deixe o robô se candidatar por você</title>
-  <meta name="description" content="VagaAutomática: aplicação automática de vagas, otimização de perfil e resultados reais. Deixe nossa IA trabalhar enquanto você foca no que importa." />
-  <meta name="author" content="VagaAutomática" />
-  <!-- Tailwind CDN -->
+  <meta name="description" content="VagaAutomática: automação inteligente de candidaturas. Deixe a IA se candidatar por você e conquiste entrevistas em poucos dias." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --accent: #10b981; /* whatsapp green for CTAs */
-      --muted: #6b7280;
-      --card-shadow: 0 10px 30px rgba(2,6,23,0.06);
+    :root {
+      --accent: #2563eb;
+      --accent-dark: #1e40af;
+      --muted: #cbd5e1;
+      --card-bg: #1e293b;
+      --card-shadow: 0 10px 30px rgba(37,99,235,0.15);
     }
-    body{
-      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      background: #fafafa;
-      color: #0f172a;
+    body {
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #0a192f 0%, #0f274a 100%);
+      color: #ffffff;
+      overflow-x: hidden;
     }
+    a, h1, h2, h3, h4, h5, h6, strong { color: #ffffff; }
+    p, li, span, div { color: var(--muted); }
 
-    /* Pulse for CTA */
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(148,163,184,0.15);
+    }
     .pulse {
       animation: pulse-cta 1.8s infinite;
-      box-shadow: 0 10px 30px rgba(16,185,129,0.12);
+      box-shadow: 0 10px 30px rgba(37,99,235,0.25);
     }
     @keyframes pulse-cta {
       0% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-6px) scale(1.03); }
       100% { transform: translateY(0) scale(1); }
     }
-
-    /* Lift hover */
     .lift { transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s; }
-    .lift:hover { transform: translateY(-8px); box-shadow: var(--card-shadow); }
+    .lift:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(59,130,246,0.3); }
 
-    /* Soft card */
-    .card { background: white; border-radius: 12px; box-shadow: var(--card-shadow); border: 1px solid rgba(15,23,42,0.04); }
-
-    /* fade-in utility for JS */
-    .fade-in { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-in.show { opacity: 1; transform: translateY(0); }
-
-    /* accordion indicator */
-    .accordion-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
-
-    /* accessible focus */
-    :focus { outline: none; box-shadow: 0 0 0 4px rgba(16,185,129,0.12); border-radius: 8px; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .pulse { animation: none; } .lift { transition: none; } .fade-in { transition: none; }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 20px rgba(59,130,246,0.6);
+      transform: scale(1.05);
+    }
+    .btn-secondary {
+      background: #1e293b;
+      border: 1px solid rgba(148,163,184,0.3);
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+      box-shadow: 0 0 15px rgba(59,130,246,0.4);
+      transform: scale(1.03);
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
+
 <body class="antialiased">
 
   <!-- HEADER -->
   <header class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
-    <a class="flex items-center gap-3" href="#" aria-label="VagaAutomática - Início">
-      <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-white card text-emerald-600 font-extrabold">VA</div>
+    <a class="flex items-center gap-3" href="#">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-[#1e3a8a] text-white font-extrabold">VA</div>
       <div>
-        <div class="text-sm font-semibold">VagaAutomática</div>
-        <div class="text-xs text-slate-500 -mt-1">Automação de candidaturas</div>
+        <div class="text-sm font-semibold text-white">VagaAutomática</div>
+        <div class="text-xs text-[#93c5fd] -mt-1">Automação de candidaturas</div>
       </div>
     </a>
-
-    <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600">
-      <a href="#servicos" class="hover:text-slate-900">Serviços</a>
-      <a href="#provas" class="hover:text-slate-900">Provas</a>
-      <a href="#faq" class="hover:text-slate-900">FAQ</a>
-      <a href="#contato" class="ml-4 inline-flex items-center rounded-full px-4 py-2 border border-slate-200 bg-white text-slate-800">Fale no WhatsApp</a>
+    <nav class="hidden md:flex items-center gap-6 text-sm text-[#cbd5e1]">
+      <a href="#servicos" class="hover:text-[#3b82f6]">Serviços</a>
+      <a href="#provas" class="hover:text-[#3b82f6]">Provas</a>
+      <a href="#faq" class="hover:text-[#3b82f6]">FAQ</a>
+      <a href="#contato" class="ml-4 inline-flex items-center rounded-full px-4 py-2 btn-secondary">Fale no WhatsApp</a>
     </nav>
   </header>
 
-  <!-- MAIN -->
-  <main class="max-w-5xl mx-auto px-6 py-6">
-
-    <!-- HERO (centralizado, sem imagem) -->
-    <section class="text-center py-12 md:py-20">
-      <h1 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4 fade-in" id="hero-title">
-        Tá cansado de ficar atrás de perfis premiuns no LinkedIn?
-      </h1>
-
-      <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-6 fade-in" id="hero-sub">
-        Deixa o <strong>VagaAutomática</strong> fazer isso por você. Aplique automaticamente para vagas, otimize seu perfil e apareça para recrutadores — sem horas perdidas.
-      </p>
-
-      <div class="flex justify-center gap-4 items-center mb-6 fade-in" id="hero-cta">
-        <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer"
-           class="pulse inline-flex items-center gap-3 px-6 py-4 rounded-full font-semibold text-white"
-           style="background: linear-gradient(90deg,#10b981,#059669);">
-           <!-- WhatsApp Icon -->
-           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
-           Quero que o robô me candidate
-        </a>
-
-        <a href="#servicos" class="inline-flex items-center px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-800">Ver serviços</a>
+  <!-- HERO -->
+  <main class="max-w-5xl mx-auto px-6 py-6 text-center">
+    <section class="py-12 md:py-20 fade-in">
+      <div class="flex flex-col items-center justify-center mb-6">
+        <img src="Captura_de_tela_2025-10-27_151306-removebg-preview.png" alt="Avatar VagaAutomática" class="w-40 md:w-44 mb-4 animate-bounce-slow">
       </div>
-
-      <!-- short trust strip -->
-      <div class="mx-auto max-w-xl text-sm text-slate-600 fade-in">
-        <span class="inline-flex items-center gap-2 mr-4">★★★★★ <strong class="ml-1">4.9</strong></span>
-        • <strong>+2.500</strong> usuários ativos • <strong>+1.000</strong> contratações estimadas
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Deixe a IA se candidatar por você e conquiste entrevistas em poucos dias.</h1>
+      <p class="text-lg max-w-2xl mx-auto mb-6">+2.500 profissionais já automatizaram candidaturas e aceleraram suas contratações com o <strong>VagaAutomática</strong>.</p>
+      <div class="flex justify-center gap-4 items-center mb-6">
+        <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer" class="pulse inline-flex items-center gap-3 px-6 py-4 rounded-full font-semibold btn-primary">Quero que o robô me candidate 🚀</a>
+        <a href="#servicos" class="inline-flex items-center px-4 py-3 rounded-lg btn-secondary">Ver serviços</a>
       </div>
     </section>
 
-    <!-- SECTIONS: Services -->
-    <section id="servicos" class="py-8">
-      <h2 class="text-xl font-semibold mb-4 fade-in">O que o VagaAutomática faz</h2>
+    <!-- AUTORIDADE -->
+    <section class="py-10 fade-in">
+      <h2 class="text-2xl font-extrabold mb-8 text-center">Por que escolher o VagaAutomática?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div class="card p-6 lift">
+          <h3 class="font-semibold text-white mb-2">🏆 Resultados comprovados</h3>
+          <p>Usuários relatam até 5x mais convites para entrevistas nas primeiras semanas.</p>
+        </div>
+        <div class="card p-6 lift">
+          <h3 class="font-semibold text-white mb-2">🔒 Seguro para LinkedIn</h3>
+          <p>Configurações otimizadas para evitar bloqueios e seguir boas práticas.</p>
+        </div>
+        <div class="card p-6 lift">
+          <h3 class="font-semibold text-white mb-2">⚙️ 100% automatizado</h3>
+          <p>O robô aplica por você — enquanto você foca em se preparar para a entrevista.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVAS -->
+    <section id="provas" class="py-10 text-center fade-in">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-4">O que nossos usuários dizem</h2>
+      <div class="relative overflow-hidden max-w-3xl mx-auto">
+        <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
+          <div class="min-w-full card p-6"><h3 class="font-semibold text-white mb-3">Rafael Costa</h3><p>“A IA mudou minha rotina. Em 2 semanas recebi mais respostas do que em 6 meses.”</p></div>
+          <div class="min-w-full card p-6"><h3 class="font-semibold text-white mb-3">Bruno Silva</h3><p>“VagaAutomática salvou minha busca. Em 3 semanas consegui minha primeira vaga.”</p></div>
+          <div class="min-w-full card p-6"><h3 class="font-semibold text-white mb-3">Mariana Santos</h3><p>“Ferramenta incrível! Consegui a vaga que sempre quis em menos de 1 mês.”</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="py-10 fade-in">
+      <h2 class="text-xl font-semibold mb-4 text-center">O que o VagaAutomática faz por você</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card p-5 lift fade-in">
-          <h3 class="font-semibold mb-2">Aplicações automáticas</h3>
-          <p class="text-slate-600 text-sm">Candidaturas em massa com mensagens personalizadas: economize tempo e aumente suas chances sem esforço manual.</p>
-        </div>
-        <div class="card p-5 lift fade-in">
-          <h3 class="font-semibold mb-2">Otimização de perfil</h3>
-          <p class="text-slate-600 text-sm">Ajustamos título, resumo e palavras-chave para você aparecer nas buscas certas.</p>
-        </div>
-        <div class="card p-5 lift fade-in">
-          <h3 class="font-semibold mb-2">Currículos e templates aprovados</h3>
-          <p class="text-slate-600 text-sm">Modelos validados pelo mercado que aumentam suas chances de resposta.</p>
-        </div>
-        <div class="card p-5 lift fade-in">
-          <h3 class="font-semibold mb-2">Consultoria rápida</h3>
-          <p class="text-slate-600 text-sm">Sessões curtas para alinhar narrativa, salário e preparação para entrevistas.</p>
-        </div>
+        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Aplicações automáticas</h3><p>Envie candidaturas em massa com mensagens personalizadas.</p></div>
+        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Otimização de perfil</h3><p>Ajustamos seu perfil para destacar suas qualificações nas buscas certas.</p></div>
+        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Currículos otimizados</h3><p>Modelos validados que aumentam sua taxa de resposta.</p></div>
+        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Consultoria rápida</h3><p>Em poucos minutos, você já tem sua automação pronta para rodar.</p></div>
       </div>
     </section>
 
-    <!-- PROVAS SOCIAIS / TESTIMONIAL CARDS (estilo exemplo) -->
-    <section id="provas" class="py-10">
-      <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-4 fade-in">Mais de 1.000 candidatos experientes estão usando o VagaAutomática</h2>
-      <p class="text-center text-slate-600 max-w-2xl mx-auto mb-8 fade-in">Veja o que nossos usuários dizem sobre como transformamos suas carreiras.</p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- testimonial 1 -->
-        <article class="card p-6 fade-in lift">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 font-semibold">RC</div>
-            <div>
-              <div class="font-semibold text-sm">Rafael Costa</div>
-              <div class="text-xs text-slate-500">Desenvolvedor Frontend</div>
-            </div>
-          </div>
-          <div class="text-amber-400 mb-3">★★★★★</div>
-          <p class="text-slate-700 text-sm">"A IA mudou minha rotina: antes perdia horas aplicando manualmente. Em 2 semanas recebi mais respostas do que em 6 meses." <span class="text-emerald-600 font-semibold">Contratado!</span></p>
-          <div class="text-xs text-slate-400 mt-4">5 de fevereiro de 2024</div>
-        </article>
-
-        <!-- testimonial 2 -->
-        <article class="card p-6 fade-in lift">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-semibold">BS</div>
-            <div>
-              <div class="font-semibold text-sm">Bruno Silva</div>
-              <div class="text-xs text-slate-500">Engenheiro</div>
-            </div>
-          </div>
-          <div class="text-amber-400 mb-3">★★★★★</div>
-          <p class="text-slate-700 text-sm">"VagaAutomática salvou minha busca. Em 3 semanas já consegui minha primeira vaga como júnior — recomendo!"</p>
-          <div class="text-xs text-slate-400 mt-4">15 de dezembro de 2024</div>
-        </article>
-
-        <!-- testimonial 3 -->
-        <article class="card p-6 fade-in lift">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-semibold">EM</div>
-            <div>
-              <div class="font-semibold text-sm">Mariana Santos</div>
-              <div class="text-xs text-slate-500">Enfermeira</div>
-            </div>
-          </div>
-          <div class="text-amber-400 mb-3">★★★★★</div>
-          <p class="text-slate-700 text-sm">"Ferramenta incrível! O simulador e as dicas de perfil fizeram toda a diferença. Consegui a vaga que sempre quis."</p>
-          <div class="text-xs text-slate-400 mt-4">8 de janeiro de 2025</div>
-        </article>
-      </div>
+    <!-- CTA FINAL -->
+    <section id="contato" class="py-16 text-center fade-in">
+      <h3 class="text-2xl font-extrabold mb-4">Enquanto você lê isso, nosso robô já está aplicando para novas vagas.</h3>
+      <p class="mb-6 text-[#cbd5e1]">Deixe a IA fazer o trabalho repetitivo. Você foca no que importa: ser contratado.</p>
+      <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer" class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold pulse btn-primary">Sim — quero o robô agora 🚀</a>
     </section>
-
-    <!-- CONFIDENCE BLOCK (Antes do CTA final) -->
-    <section class="py-10">
-      <div class="card p-6 md:p-8 fade-in">
-        <div class="md:flex md:items-center md:justify-between">
-          <div>
-            <h3 class="text-xl font-semibold mb-2">Acesso vitalício e resultados reais</h3>
-            <p class="text-slate-600 max-w-2xl">Pague uma vez e tenha acesso contínuo. Sem mensalidades escondidas. Mais de <strong>2.500</strong> profissionais já usaram o VagaAutomática para acelerar suas contratações.</p>
-            <div class="mt-4 text-sm text-slate-600 flex flex-wrap gap-4 items-center">
-              <div class="flex items-center gap-2">★★★★★ <strong>4.9/5</strong> (2.847 avaliações)</div>
-              <div>•</div>
-              <div><strong>+10.473</strong> usuários ativos</div>
-            </div>
-          </div>
-
-          <div class="mt-6 md:mt-0">
-            <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer"
-               class="inline-flex items-center gap-3 px-6 py-4 bg-emerald-600 text-white rounded-full font-semibold pulse"
-               aria-label="Chamar no WhatsApp - VagaAutomática">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
-              Pronto pra deixar o robô trabalhar por você?
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="py-10">
-      <h2 class="text-2xl font-extrabold mb-2 fade-in">Perguntas Frequentes</h2>
-      <p class="text-slate-600 mb-6 fade-in">Tire suas dúvidas sobre o VagaAutomática e descubra como podemos te ajudar.</p>
-
-      <div class="space-y-3">
-        <!-- FAQ item template -->
-        <div class="card p-4 fade-in">
-          <button class="w-full text-left accordion-btn flex items-center justify-between py-2" aria-expanded="false">
-            <span class="font-semibold">Isso funciona mesmo? Tem resultados comprovados?</span>
-            <svg class="chev w-5 h-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.939l3.71-3.75a.75.75 0 111.06 1.06l-4.24 4.29a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" clip-rule="evenodd"/></svg>
-          </button>
-          <div class="mt-2 text-sm text-slate-600 hidden">
-            Sim — temos centenas de resultados documentados. O VagaAutomática automatiza aplicações e otimiza perfis com templates aprovados pelo mercado. Muitos usuários relatam aumento expressivo de convites para entrevistas nas primeiras semanas. Podemos compartilhar casos reais mediante autorização.
-          </div>
-        </div>
-
-        <div class="card p-4 fade-in">
-          <button class="w-full text-left accordion-btn flex items-center justify-between py-2" aria-expanded="false">
-            <span class="font-semibold">Quantas vagas posso me candidatar por dia?</span>
-            <svg class="chev w-5 h-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.939l3.71-3.75a.75.75 0 111.06 1.06l-4.24 4.29a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" clip-rule="evenodd"/></svg>
-          </button>
-          <div class="mt-2 text-sm text-slate-600 hidden">
-            O número depende do plano e das regras da plataforma alvo (LinkedIn, Gupy, etc.). Configamos limites seguros para evitar comportamentos suspeitos e personalizamos a cadência conforme seu perfil e preferências. Em média, usuários ativos aplicam dezenas a centenas de vagas por semana com resultados consistentes.
-          </div>
-        </div>
-
-        <div class="card p-4 fade-in">
-          <button class="w-full text-left accordion-btn flex items-center justify-between py-2" aria-expanded="false">
-            <span class="font-semibold">Tem cupom de desconto? Quanto custa?</span>
-            <svg class="chev w-5 h-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.939l3.71-3.75a.75.75 0 111.06 1.06l-4.24 4.29a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" clip-rule="evenodd"/></svg>
-          </button>
-          <div class="mt-2 text-sm text-slate-600 hidden">
-            Temos ofertas e cupons em campanhas sazonais. O VagaAutomática costuma oferecer acesso vitalício com pagamento único em promoções — confira a área de preços ou fale conosco no WhatsApp para receber o melhor valor disponível agora.
-          </div>
-        </div>
-
-        <div class="card p-4 fade-in">
-          <button class="w-full text-left accordion-btn flex items-center justify-between py-2" aria-expanded="false">
-            <span class="font-semibold">Funciona para GUPY, Indeed, Glassdoor e Vagas.com?</span>
-            <svg class="chev w-5 h-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.939l3.71-3.75a.75.75 0 111.06 1.06l-4.24 4.29a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" clip-rule="evenodd"/></svg>
-          </button>
-          <div class="mt-2 text-sm text-slate-600 hidden">
-            Sim — o VagaAutomática foi projetado para integrar com as principais plataformas de vagas. Para cada serviço, adaptamos o fluxo de candidatura para garantir compatibilidade e resultados.
-          </div>
-        </div>
-
-        <div class="card p-4 fade-in">
-          <button class="w-full text-left accordion-btn flex items-center justify-between py-2" aria-expanded="false">
-            <span class="font-semibold">É fácil de usar? Funciona no celular?</span>
-            <svg class="chev w-5 h-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.939l3.71-3.75a.75.75 0 111.06 1.06l-4.24 4.29a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" clip-rule="evenodd"/></svg>
-          </button>
-          <div class="mt-2 text-sm text-slate-600 hidden">
-            Sim — painéis simples e configuração guiada. A maior parte do gerenciamento é feita pelo painel web (funciona em mobile) e pelo nosso suporte para te deixar tudo pronto em 5–10 minutos.
-          </div>
-        </div>
-
-        <div class="card p-4 fade-in">
-          <button class="w-full text-left accordion-btn flex items-center justify-between py-2" aria-expanded="false">
-            <span class="font-semibold">Isso pode bloquear meu perfil no LinkedIn?</span>
-            <svg class="chev w-5 h-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.939l3.71-3.75a.75.75 0 111.06 1.06l-4.24 4.29a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" clip-rule="evenodd"/></svg>
-          </button>
-          <div class="mt-2 text-sm text-slate-600 hidden">
-            Nós operamos com políticas de uso responsável: limitamos cadência, personalizamos mensagens e recomendamos práticas para reduzir riscos. Nenhuma ferramenta garante 0% de risco, mas usamos configurações seguras e orientamos os usuários para minimizar bloqueios.
-          </div>
-        </div>
-
-        <div class="card p-4 fade-in">
-          <button class="w-full text-left accordion-btn flex items-center justify-between py-2" aria-expanded="false">
-            <span class="font-semibold">Tem casos de sucesso reais? Funciona para minha área?</span>
-            <svg class="chev w-5 h-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.939l3.71-3.75a.75.75 0 111.06 1.06l-4.24 4.29a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" clip-rule="evenodd"/></svg>
-          </button>
-          <div class="mt-2 text-sm text-slate-600 hidden">
-            Temos histórias de sucesso em tecnologia, saúde, vendas e áreas administrativas. Se você quer saber sobre sua área específica, fale conosco no WhatsApp — vamos te enviar exemplos e recomendar a melhor configuração.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section id="contato" class="py-12 text-center fade-in">
-      <h3 class="text-xl font-semibold mb-3">Pronto para simplificar sua busca?</h3>
-      <p class="text-slate-600 mb-6">A configuração é rápida. Em minutos o VagaAutomática começa a trabalhar por você.</p>
-      <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer"
-         class="inline-flex items-center gap-3 px-8 py-4 bg-emerald-600 text-white rounded-full font-semibold pulse" aria-label="Chamar no WhatsApp final">
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
-        Sim — quero que o robô me candidate
-      </a>
-    </section>
-
   </main>
 
-  <!-- Sticky WhatsApp button -->
-  <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer" aria-label="Chamar no WhatsApp — fixo"
-     class="fixed right-5 bottom-5 z-50 flex items-center gap-3 px-4 py-3 rounded-full text-white shadow-lg"
-     style="background:linear-gradient(90deg,#10b981,#059669);">
-    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
-    <span class="font-semibold">Chamar no WhatsApp</span>
+  <!-- BOTÃO FIXO -->
+  <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer"
+     class="fixed right-5 bottom-5 z-50 flex items-center gap-3 px-5 py-3 rounded-full text-white font-semibold btn-primary shadow-lg">
+     🤖 Quero o robô agora
   </a>
 
-  <footer class="max-w-5xl mx-auto px-6 py-8 text-sm text-slate-500">
-    <div class="md:flex md:justify-between items-center">
-      <div>© <span id="year"></span> VagaAutomática • Todos os direitos reservados</div>
-      <div class="mt-3 md:mt-0">Política de privacidade • Termos</div>
-    </div>
+  <!-- FOOTER -->
+  <footer class="max-w-5xl mx-auto px-6 py-8 text-sm text-[#93c5fd] text-center">
+    © <span id="year"></span> VagaAutomática • Todos os direitos reservados
   </footer>
 
-  <!-- SCRIPTS: accordion and fade-in on scroll -->
   <script>
-    // set year
+    // Atualiza o ano
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // fade in observer
-    const observer = new IntersectionObserver((entries) => {
+    // Fade-in das seções ao rolar
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('show');
           observer.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
-
+    }, { threshold: 0.2 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // accordion behaviour
-    document.querySelectorAll('.accordion-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        // close all to keep it tidy
-        document.querySelectorAll('.accordion-btn').forEach(other => {
-          other.setAttribute('aria-expanded', 'false');
-          other.nextElementSibling.style.display = 'none';
-        });
-        // toggle clicked
-        if (!expanded) {
-          btn.setAttribute('aria-expanded', 'true');
-          btn.nextElementSibling.style.display = 'block';
-        } else {
-          btn.setAttribute('aria-expanded', 'false');
-          btn.nextElementSibling.style.display = 'none';
-        }
-      });
-      // ensure initial hidden
-      btn.nextElementSibling.style.display = 'none';
-    });
-
-    // keyboard accessibility for accordion
-    document.querySelectorAll('.accordion-btn').forEach(btn => {
-      btn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
-      });
-    });
-
-    // small enhancement: track CTA clicks (if GTM/dataLayer exists)
-    document.querySelectorAll('a[href^="https://wa.me"]').forEach(a => {
-      a.addEventListener('click', () => {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'whatsapp_cta_click', href: a.href });
-      });
-    });
+    // Carrossel automático
+    const carousel = document.getElementById('carousel');
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % 3;
+      carousel.style.transform = `translateX(-${index * 100}%)`;
+    }, 4000);
   </script>
 </body>
 </html>
