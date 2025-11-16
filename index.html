@@ -1,194 +1,266 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>VagaAutomática — Deixe o robô se candidatar por você</title>
-  <meta name="description" content="VagaAutomática: automação inteligente de candidaturas. Deixe a IA se candidatar por você e conquiste entrevistas em poucos dias." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #2563eb;
-      --accent-dark: #1e40af;
-      --muted: #cbd5e1;
-      --card-bg: #1e293b;
-      --card-shadow: 0 10px 30px rgba(37,99,235,0.15);
-    }
-    body {
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #0a192f 0%, #0f274a 100%);
-      color: #ffffff;
-      overflow-x: hidden;
-    }
-    a, h1, h2, h3, h4, h5, h6, strong { color: #ffffff; }
-    p, li, span, div { color: var(--muted); }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: var(--card-shadow);
-      border: 1px solid rgba(148,163,184,0.15);
-    }
-    .pulse {
-      animation: pulse-cta 1.8s infinite;
-      box-shadow: 0 10px 30px rgba(37,99,235,0.25);
-    }
-    @keyframes pulse-cta {
-      0% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-6px) scale(1.03); }
-      100% { transform: translateY(0) scale(1); }
-    }
-    .lift { transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s; }
-    .lift:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(59,130,246,0.3); }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
-      color: white;
-      transition: all 0.3s ease;
-    }
-    .btn-primary:hover {
-      box-shadow: 0 0 20px rgba(59,130,246,0.6);
-      transform: scale(1.05);
-    }
-    .btn-secondary {
-      background: #1e293b;
-      border: 1px solid rgba(148,163,184,0.3);
-      color: #ffffff;
-      transition: all 0.3s ease;
-    }
-    .btn-secondary:hover {
-      box-shadow: 0 0 15px rgba(59,130,246,0.4);
-      transform: scale(1.03);
-    }
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .8s ease, transform .8s ease;
-    }
-    .fade-in.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
-</head>
-
-<body class="antialiased">
-
-  <!-- HEADER -->
-  <header class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
-    <a class="flex items-center gap-3" href="#">
-      <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-[#1e3a8a] text-white font-extrabold">VA</div>
-      <div>
-        <div class="text-sm font-semibold text-white">VagaAutomática</div>
-        <div class="text-xs text-[#93c5fd] -mt-1">Automação de candidaturas</div>
-      </div>
-    </a>
-    <nav class="hidden md:flex items-center gap-6 text-sm text-[#cbd5e1]">
-      <a href="#servicos" class="hover:text-[#3b82f6]">Serviços</a>
-      <a href="#provas" class="hover:text-[#3b82f6]">Provas</a>
-      <a href="#faq" class="hover:text-[#3b82f6]">FAQ</a>
-      <a href="#contato" class="ml-4 inline-flex items-center rounded-full px-4 py-2 btn-secondary">Fale no WhatsApp</a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <main class="max-w-5xl mx-auto px-6 py-6 text-center">
-    <section class="py-12 md:py-20 fade-in">
-      <div class="flex flex-col items-center justify-center mb-6">
-        <img src="Captura_de_tela_2025-10-27_151306-removebg-preview.png" alt="Avatar VagaAutomática" class="w-40 md:w-44 mb-4 animate-bounce-slow">
-      </div>
-      <h1 class="text-3xl md:text-4xl font-extrabold mb-4">Deixe a IA se candidatar por você e conquiste entrevistas em poucos dias.</h1>
-      <p class="text-lg max-w-2xl mx-auto mb-6">+2.500 profissionais já automatizaram candidaturas e aceleraram suas contratações com o <strong>VagaAutomática</strong>.</p>
-      <div class="flex justify-center gap-4 items-center mb-6">
-        <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer" class="pulse inline-flex items-center gap-3 px-6 py-4 rounded-full font-semibold btn-primary">Quero que o robô me candidate 🚀</a>
-        <a href="#servicos" class="inline-flex items-center px-4 py-3 rounded-lg btn-secondary">Ver serviços</a>
-      </div>
-    </section>
-
-    <!-- AUTORIDADE -->
-    <section class="py-10 fade-in">
-      <h2 class="text-2xl font-extrabold mb-8 text-center">Por que escolher o VagaAutomática?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-        <div class="card p-6 lift">
-          <h3 class="font-semibold text-white mb-2">🏆 Resultados comprovados</h3>
-          <p>Usuários relatam até 5x mais convites para entrevistas nas primeiras semanas.</p>
-        </div>
-        <div class="card p-6 lift">
-          <h3 class="font-semibold text-white mb-2">🔒 Seguro para LinkedIn</h3>
-          <p>Configurações otimizadas para evitar bloqueios e seguir boas práticas.</p>
-        </div>
-        <div class="card p-6 lift">
-          <h3 class="font-semibold text-white mb-2">⚙️ 100% automatizado</h3>
-          <p>O robô aplica por você — enquanto você foca em se preparar para a entrevista.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROVAS -->
-    <section id="provas" class="py-10 text-center fade-in">
-      <h2 class="text-2xl md:text-3xl font-extrabold mb-4">O que nossos usuários dizem</h2>
-      <div class="relative overflow-hidden max-w-3xl mx-auto">
-        <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
-          <div class="min-w-full card p-6"><h3 class="font-semibold text-white mb-3">Rafael Costa</h3><p>“A IA mudou minha rotina. Em 2 semanas recebi mais respostas do que em 6 meses.”</p></div>
-          <div class="min-w-full card p-6"><h3 class="font-semibold text-white mb-3">Bruno Silva</h3><p>“VagaAutomática salvou minha busca. Em 3 semanas consegui minha primeira vaga.”</p></div>
-          <div class="min-w-full card p-6"><h3 class="font-semibold text-white mb-3">Mariana Santos</h3><p>“Ferramenta incrível! Consegui a vaga que sempre quis em menos de 1 mês.”</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVIÇOS -->
-    <section id="servicos" class="py-10 fade-in">
-      <h2 class="text-xl font-semibold mb-4 text-center">O que o VagaAutomática faz por você</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Aplicações automáticas</h3><p>Envie candidaturas em massa com mensagens personalizadas.</p></div>
-        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Otimização de perfil</h3><p>Ajustamos seu perfil para destacar suas qualificações nas buscas certas.</p></div>
-        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Currículos otimizados</h3><p>Modelos validados que aumentam sua taxa de resposta.</p></div>
-        <div class="card p-5 lift"><h3 class="font-semibold mb-2">Consultoria rápida</h3><p>Em poucos minutos, você já tem sua automação pronta para rodar.</p></div>
-      </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section id="contato" class="py-16 text-center fade-in">
-      <h3 class="text-2xl font-extrabold mb-4">Enquanto você lê isso, nosso robô já está aplicando para novas vagas.</h3>
-      <p class="mb-6 text-[#cbd5e1]">Deixe a IA fazer o trabalho repetitivo. Você foca no que importa: ser contratado.</p>
-      <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer" class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold pulse btn-primary">Sim — quero o robô agora 🚀</a>
-    </section>
-  </main>
-
-  <!-- BOTÃO FIXO -->
-  <a href="https://wa.me/5511987977362" target="_blank" rel="noreferrer"
-     class="fixed right-5 bottom-5 z-50 flex items-center gap-3 px-5 py-3 rounded-full text-white font-semibold btn-primary shadow-lg">
-     🤖 Quero o robô agora
-  </a>
-
-  <!-- FOOTER -->
-  <footer class="max-w-5xl mx-auto px-6 py-8 text-sm text-[#93c5fd] text-center">
-    © <span id="year"></span> VagaAutomática • Todos os direitos reservados
-  </footer>
-
-  <script>
-    // Atualiza o ano
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Fade-in das seções ao rolar
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('show');
-          observer.unobserve(e.target);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maromba Run - Foco no Shape</title>
+    <style>
+        /* Estilização Básica */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222; /* Fundo escuro de academia */
+            color: white;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
         }
-      });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Carrossel automático
-    const carousel = document.getElementById('carousel');
-    let index = 0;
-    setInterval(() => {
-      index = (index + 1) % 3;
-      carousel.style.transform = `translateX(-${index * 100}%)`;
-    }, 4000);
-  </script>
+        h1 {
+            margin-top: -50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
+
+        /* Área do Jogo */
+        #game-container {
+            width: 800px;
+            height: 300px;
+            border-bottom: 5px solid #555;
+            position: relative;
+            background: linear-gradient(to bottom, #333, #222);
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* O Marombeiro */
+        #maromba {
+            width: 60px;
+            height: 80px;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            /* Usando emoji como sprite provisório */
+            font-size: 60px; 
+            line-height: 80px;
+            text-align: center;
+        }
+
+        /* Classe de animação de pulo */
+        .jump-animation {
+            animation: jump 0.6s ease-out;
+        }
+
+        @keyframes jump {
+            0% { bottom: 0; }
+            30% { bottom: 120px; } /* Altura do pulo */
+            60% { bottom: 120px; }
+            100% { bottom: 0; }
+        }
+
+        /* O Obstáculo (Pizza/Hambúrguer) */
+        #obstacle {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            bottom: 0;
+            right: -50px; /* Começa fora da tela */
+            font-size: 35px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        /* Animação do obstáculo se movendo */
+        .obstacle-animation {
+            animation: moveObstacle 2s infinite linear;
+        }
+
+        @keyframes moveObstacle {
+            0% { right: -50px; }
+            100% { right: 100%; }
+        }
+
+        /* Placar */
+        #score {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Botão de Iniciar */
+        #start-msg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .btn {
+            background-color: #00ffcc;
+            color: #222;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #00ccaa;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Maromba Run 🏋️‍♂️</h1>
+    
+    <div id="game-container">
+        <div id="score">Whey: 0</div>
+        <div id="start-msg">
+            <p>Fuja das calorias vazias!</p>
+            <p>Pressione ESPAÇO para pular</p>
+            <button class="btn" onclick="startGame()">BORIBILDER!</button>
+        </div>
+
+        <div id="maromba">🏋️</div>
+        
+        <div id="obstacle">🍕</div>
+    </div>
+
+    <script>
+        const maromba = document.getElementById('maromba');
+        const obstacle = document.getElementById('obstacle');
+        const scoreElement = document.getElementById('score');
+        const startMsg = document.getElementById('start-msg');
+        
+        let isJumping = false;
+        let isGameOver = false;
+        let score = 0;
+        let gameLoop; // Para controlar a verificação de colisão
+        let scoreInterval; // Para controlar os pontos
+
+        // Lista de obstáculos (Tentações)
+        const foods = ['🍕', '🍔', '🍩', '🌭', '🍺', '🍟'];
+
+        function startGame() {
+            startMsg.style.display = 'none';
+            isGameOver = false;
+            score = 0;
+            scoreElement.innerText = "Whey: 0";
+            
+            obstacle.classList.add('obstacle-animation');
+            
+            // Reinicia animação para garantir velocidade inicial
+            obstacle.style.animation = 'none';
+            obstacle.offsetHeight; /* trigger reflow */
+            obstacle.style.animation = 'moveObstacle 1.8s infinite linear';
+
+            // Inicia loop de pontos
+            scoreInterval = setInterval(() => {
+                score++;
+                scoreElement.innerText = "Whey: " + score;
+                
+                // Aumenta a dificuldade (velocidade) a cada 100 pontos
+                if (score % 100 === 0) {
+                    increaseSpeed();
+                }
+            }, 100);
+
+            // Inicia verificação de colisão
+            gameLoop = setInterval(checkCollision, 10);
+        }
+
+        function increaseSpeed() {
+            const currentDuration = parseFloat(getComputedStyle(obstacle).animationDuration);
+            if (currentDuration > 0.8) { // Limite máximo de velocidade
+                const newDuration = (currentDuration - 0.1) + 's';
+                obstacle.style.animationDuration = newDuration;
+            }
+        }
+
+        function jump() {
+            if (!isJumping && !isGameOver) {
+                isJumping = true;
+                maromba.classList.add('jump-animation');
+
+                setTimeout(() => {
+                    maromba.classList.remove('jump-animation');
+                    isJumping = false;
+                }, 600); // Duração da animação CSS
+            }
+        }
+
+        function checkCollision() {
+            // Posição vertical do maromba (topo)
+            let marombaTop = parseInt(window.getComputedStyle(maromba).getPropertyValue("top"));
+            
+            // Posição horizontal do obstáculo
+            let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left"));
+
+            // Detecta colisão
+            // O obstáculo está entre 0 e 50px (perto do maromba) E o maromba não pulou alto o suficiente
+            // Altura total do container é 300. Personagem tem 80px. Bottom 0 = Top 220.
+            // Se ele pular, o Top diminui. Se Top > 240 (chutando margem), ele tá no chão.
+            
+            // Ajuste fino da colisão
+            if (obstacleLeft < 100 && obstacleLeft > 50 && marombaTop >= 220) {
+                gameOver();
+            }
+            
+            // Troca o ícone da comida aleatoriamente quando sai da tela
+            if (obstacleLeft < 0) {
+                changeFood();
+            }
+        }
+
+        function changeFood() {
+            // Só troca visualmente, a lógica de colisão é a mesma
+            // Mas precisamos garantir que isso rode apenas uma vez por ciclo do obstáculo
+            // O CSS cuida do loop, aqui é só um visual extra se quiser
+            const randomFood = foods[Math.floor(Math.random() * foods.length)];
+            obstacle.innerText = randomFood;
+        }
+
+        function gameOver() {
+            isGameOver = true;
+            obstacle.classList.remove('obstacle-animation');
+            clearInterval(gameLoop);
+            clearInterval(scoreInterval);
+            
+            startMsg.innerHTML = `
+                <p style="color: red; font-weight: bold;">COMEU BESTEIRA!</p>
+                <p>Score Final: ${score}</p>
+                <button class="btn" onclick="startGame()">TREINAR DE NOVO</button>
+            `;
+            startMsg.style.display = 'block';
+        }
+
+        // Controles
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space' || event.code === 'ArrowUp') {
+                jump();
+            }
+        });
+
+        // Para celular
+        document.addEventListener('touchstart', () => {
+            jump();
+        });
+
+    </script>
 </body>
 </html>
